@@ -3,6 +3,7 @@ const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 
 // Fetch the JSON data and console log it
 d3.json(url).then(function(data) {
+    console.log(data)
     // Display the default plots
     function init() {
         /////////////////////////////////////////////
@@ -20,10 +21,17 @@ d3.json(url).then(function(data) {
         let toptenHovers = sample.otu_labels.slice(0, 10);
         toptenHovers.reverse();
 
+        console.log(sample)
+        console.log(toptenSamples)
+        console.log(toptenLabels)
+        console.log(toptenHovers)
+
         // Get OTU names as labels
         let labels = toptenLabels.map(function (row){
             return `OTU ${row}`;
         });
+
+        console.log(labels)
 
         // Trace for bar graph OTU data
         let trace1 = {
@@ -82,6 +90,8 @@ d3.json(url).then(function(data) {
         for (const [key, value] of Object.entries(metadataInfo)) {
             metadataPanel.append("h5").text(`${key}: ${value}`);
         };
+
+        console.log(metadataInfo)
     };
 
 
@@ -117,6 +127,11 @@ d3.json(url).then(function(data) {
         metadataPanel = d3.select("#sample-metadata");
         metadataInfo = selectWhere(data.metadata, "id");
         metadataPanel.html("")
+
+        console.log(toptenSamples)
+        console.log(toptenLabels)
+        console.log(toptenHovers)
+        console.log(metadataInfo)
 
         for (const [key, value] of Object.entries(metadataInfo)) {
             metadataPanel.append("h5").text(`${key}: ${value}`);
@@ -186,6 +201,6 @@ d3.json(url).then(function(data) {
         el.value = opt;
         dropMenu.appendChild(el);
     };
-
+    
     init();
 });
